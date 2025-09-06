@@ -17,15 +17,25 @@ def extract_text(pdf_content):
 def prepare_podcast_text_gemini(text, api_key):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key={api_key}"
     prompt = f"""
-    You are the narrator of a technical research podcast. 
-    Generate a podcast-style script that dives directly into the content without preamble.
-    Maintain a confident, authoritative tone while weaving in precise technical terminology. 
-    Summarize the research in an engaging flow, highlighting methodology, data-driven insights, 
-    experimental design, and theoretical implications. Avoid oversimplifying; assume the audience 
-    is familiar with advanced concepts in the domain.
-    Do mention all key aspects and key details in the paper.
-    Goal is to make this summary as informative and comprehensive as possible.
-    The script should sound like a professional research briefing intended for expert listeners.
+You are the narrator of a technical research podcast. 
+Generate a podcast-style script that dives directly into the content without preamble.
+Maintain a confident, authoritative tone while weaving in precise technical terminology. 
+Summarize the research in an engaging flow, highlighting methodology, data-driven insights, 
+experimental design, and theoretical implications. Avoid oversimplifying; assume the audience 
+is familiar with advanced concepts in the domain.
+Do mention all key aspects and key details in the paper.
+Goal is to make this summary as informative and comprehensive as possible.
+The script should sound like a professional research briefing intended for expert listeners.
+
+IMPORTANT:
+- Do NOT include stage directions, music cues, or comments about audio.
+- Only produce spoken narrative, fully in the voice of the narrator.
+
+Additionally:
+- Your final script should be long enough to produce at least 20 minutes of spoken audio at a natural pace.
+- Include detailed explanations, step-by-step walkthroughs of methodology, examples of results, and thorough discussion of implications.
+- Expand on every key concept sufficiently so that the listener gains a deep understanding.
+- Do NOT shorten or summarize too aggressively.
 
     Research paper content:
     {text[:20000000]}

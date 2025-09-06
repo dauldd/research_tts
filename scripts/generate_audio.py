@@ -8,7 +8,7 @@ def generate_audio(text, output_file, api_key):
         audio_generator = client.text_to_speech.convert(
             text=text,
             voice_id=voice_id,
-            model_id="eleven_multilingual_v2",
+            model_id="eleven_flash_v2_5",
             output_format="mp3_44100_128"
         )
         with open(output_file, "wb") as f:
