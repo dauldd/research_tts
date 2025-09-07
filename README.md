@@ -1,6 +1,6 @@
 # Research Podcast Generator
 
-This project converts PDF research papers into podcast-style audio summaries using ElevenLabs TTS (eleven_flash_v2_5) and Gemini 2.5 Pro for text generation. It is intended to provide an informative spoken overview of technical papers.
+This project as part of the larger project converts PDF research papers into podcast-style audio summaries using ElevenLabs TTS (eleven_flash_v2_5) and Gemini 2.5 Pro for text generation. It is intended to provide an informative spoken overview of technical papers. You can also adjust the language by specifying in the prompt.
 
 ## Features
 
@@ -63,8 +63,7 @@ python main.py
 
 ```
 ├── episodes/         # Generated audio files
-├── sandbox/          # Temporary/test scripts
-├── src/              # Python modules (text extraction, TTS, etc.)
+├── scripts/              # Python modules (text extraction, TTS, etc.)
 ├── .env              # API keys and voice configuration
 ├── requirements.txt
 └── README.md
