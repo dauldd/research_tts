@@ -17,7 +17,7 @@ pdf_content = fetch_pdf(PDF_URL)
 if pdf_content:
     text = extract_text(pdf_content)
     if text:
-        podcast_text = prepare_podcast_text_gemini(text, GEMINI_API_KEY)
+        podcast_text = prepare_podcast_text_gemini(text, GEMINI_API_KEY, use_multi_voice)
         if podcast_text:
             if use_multi_voice:
                 parts = split_script(podcast_text)

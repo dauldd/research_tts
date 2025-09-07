@@ -7,6 +7,8 @@ This project as part of the larger project converts PDF research papers into pod
 - Extracts text from PDF documents.
 - Generates podcast-style scripts from research papers using Gemini 2.5 Pro.
 - Converts scripts to high-quality audio using ElevenLabs eleven_flash_v2_5.
+- Supports single-voice or multi-voice (narrator + co-host) modes.
+- Multi-voice mode creates dynamic conversations between narrator and co-host, enabled by setting `MULTI_VOICE=true` in your .env file.
 - Supports custom voice selection via .env.
 - Automatically saves generated audio to episodes/.
 
@@ -32,6 +34,8 @@ Dependencies include:
 ELEVENLABS_API_KEY=your_elevenlabs_key
 GEMINI_API_KEY=your_gemini_key
 VOICE_ID=optional_voice_id
+MULTI_VOICE=true
+COHOST_VOICE_ID=optional_cohost_voice_id
 ```
 
 2. Install dependencies:

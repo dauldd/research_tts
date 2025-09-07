@@ -14,38 +14,68 @@ def extract_text(pdf_content):
         print(f"Error extracting text: {e}")
         return None
 
-def prepare_podcast_text_gemini(text, api_key):
+def prepare_podcast_text_gemini(text, api_key, multi_voice=False):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key={api_key}"
-    prompt = f"""
-    You are the narrator of a technical research podcast in Finnish. The podcast features two speakers:
+    
+    if multi_voice:
+        prompt = f"""
+        You are the narrator of a technical research podcast in Finnish. The podcast features two speakers:
 
-    - Narrator: presents the research confidently and authoritatively, diving into technical details.
-    - Co-host: asks clarifying questions and summarizes key points interactively.
+        - Narrator: presents the research confidently and authoritatively, diving into technical details.
+        - Co-host: asks clarifying questions and summarizes key points interactively.
 
-    Instructions:
-    - Format every line starting with "Narrator:" or "Co-host:".
-    - Generate a podcast-style in Finnish script that dives directly into the content without preamble.
-    - Maintain a confident, authoritative tone while weaving in precise technical terminology. 
-    - Summarize the research in an engaging flow, highlighting methodology, data-driven insights, 
-    experimental design, and theoretical implications. Avoid oversimplifying; assume the audience 
-    is familiar with advanced concepts in the domain.
-    - Do mention all key aspects and key details in the paper.
-    - Goal is to make this summary as informative and comprehensive as possible.
-    - The script should sound like a professional research briefing intended for expert listeners.
+        Instructions:
+        - Format every line starting with "Narrator:" or "Co-host:".
+        - Generate a podcast-style in Finnish script that dives directly into the content without preamble.
+        - Maintain a confident, authoritative tone while weaving in precise technical terminology. 
+        - Summarize the research in an engaging flow, highlighting methodology, data-driven insights, 
+        experimental design, and theoretical implications. Avoid oversimplifying; assume the audience 
+        is familiar with advanced concepts in the domain.
+        - Do mention all key aspects and key details in the paper.
+        - Goal is to make this summary as informative and comprehensive as possible.
+        - The script should sound like a professional research briefing intended for expert listeners.
 
-    IMPORTANT:
-    - Do NOT include stage directions, music cues, or comments about audio.
-    - Only produce spoken narrative, fully in the voice of the narrator.
+        IMPORTANT:
+        - Do NOT include stage directions, music cues, or comments about audio.
+        - Only produce spoken narrative, fully in the voice of the narrator.
 
-    Additionally:
-    - Your final script should be long enough to produce around 20 minutes of spoken audio at a natural pace.
-    - Include detailed explanations, step-by-step walkthroughs of methodology, examples of results, and thorough discussion of implications.
-    - Expand on every key concept sufficiently so that the listener gains a deep understanding.
-    - Do NOT shorten or summarize too aggressively.
+        Additionally:
+        - Your final script should be long enough to produce around 20 MINUTES of spoken audio at a natural pace.
+        - Include detailed explanations, step-by-step walkthroughs of methodology, examples of results, and thorough discussion of implications.
+        - Expand on every key concept sufficiently so that the listener gains a deep understanding.
+        - Do NOT shorten or summarize too aggressively.
 
-    Research paper content:
-    {text[:20000000]}
-    """
+        Research paper content:
+        {text[:20000000]}
+        """
+    else:
+        prompt = f"""
+        You are the narrator of a technical research podcast in Finnish. Generate a comprehensive podcast script that presents the research in an engaging, informative manner.
+
+        Instructions:
+        - Generate a podcast-style in Finnish script that dives directly into the content without preamble.
+        - Maintain a confident, authoritative tone while weaving in precise technical terminology. 
+        - Summarize the research in an engaging flow, highlighting methodology, data-driven insights, 
+        experimental design, and theoretical implications. Avoid oversimplifying; assume the audience 
+        is familiar with advanced concepts in the domain.
+        - Do mention all key aspects and key details in the paper.
+        - Goal is to make this summary as informative and comprehensive as possible.
+        - The script should sound like a professional research briefing intended for expert listeners.
+
+        IMPORTANT:
+        - Do NOT include stage directions, music cues, or comments about audio.
+        - Do NOT include speaker prefixes like "Narrator:" or "Co-host:" - this is a single-voice podcast.
+        - Only produce spoken narrative content.
+
+        Additionally:
+        - Your final script should be long enough to produce around 20 MINUTES of spoken audio at a natural pace.
+        - Include detailed explanations, step-by-step walkthroughs of methodology, examples of results, and thorough discussion of implications.
+        - Expand on every key concept sufficiently so that the listener gains a deep understanding.
+        - Do NOT shorten or summarize too aggressively.
+
+        Research paper content:
+        {text[:20000000]}
+        """
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
     headers = {"Content-Type": "application/json"}
     response = requests.post(url, headers=headers, json=payload)
