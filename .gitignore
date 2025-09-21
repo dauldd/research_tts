@@ -29,4 +29,3 @@ sandbox/**
 
 # Generated audio episodes
 episodes/*
-!episodes/.gitkeep

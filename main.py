@@ -8,12 +8,11 @@ load_dotenv()
 ELEVENLABS_API_KEY = os.environ['ELEVENLABS_API_KEY']
 GEMINI_API_KEY = os.environ['GEMINI_API_KEY']
 
-PDF_URL = "https://metr.org/AI_R_D_Evaluation_Report.pdf"
 OUTPUT_FILE = "episodes/podcast_audio.mp3"
 
 use_multi_voice = os.getenv("MULTI_VOICE", "false").lower() == "true"
 
-pdf_content = fetch_pdf(PDF_URL)
+pdf_content = fetch_pdf()
 if pdf_content:
     text = extract_text(pdf_content)
     if text:
