@@ -29,3 +29,10 @@ sandbox/**
 
 # Generated audio episodes
 episodes/*
+
+service_account.json
+**/service_account.json
+*.service_account.json
+.md
+.claude
+

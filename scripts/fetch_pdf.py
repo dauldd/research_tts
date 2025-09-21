@@ -6,11 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-CALENDAR_URL = os.environ.get('CALENDAR_URL', '')
+RESOURCE_URL = os.environ.get('RESOURCE_URL', '')
 
 def fetch_calendar_data():
     try:
-        response = requests.get(CALENDAR_URL, timeout=30)
+        response = requests.get(RESOURCE_URL, timeout=30)
         response.raise_for_status()
         return response.text
     except requests.RequestException as e:

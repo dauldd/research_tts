@@ -1,6 +1,6 @@
 # Research Podcast Generator
 
-This project as part of the larger project converts PDF research papers into podcast-style audio summaries using ElevenLabs TTS (eleven_flash_v2_5) and Gemini 2.5 Pro for text generation. It is intended to provide an informative spoken overview of technical papers. You can also adjust the language by specifying in the prompt.
+This project as part of the larger project converts PDF research papers into podcast-style audio summaries using ElevenLabs TTS (eleven_flash_v2_5) and Gemini 2.5 Pro for text generation. It is intended to provide an informative spoken overview of technical papers. You can also adjust the language by specifying in the prompt. The pipeline supports dual TTS providers - choose between Google Cloud Text-to-Speech with Studio voices or ElevenLabs for audio generation. Google TTS uses the Long Audio API for extended content and automatically downloads both WAV and MP3 formats locally. Run with `python main.py google` or `python main.py elevenlabs` to select your preferred TTS provider.
 
 ## Features
 
@@ -32,10 +32,12 @@ Dependencies include:
 
 ```
 ELEVENLABS_API_KEY=your_elevenlabs_key
-GEMINI_API_KEY=your_gemini_key
+GOOGLE_API_KEY=your_gemini_key
 VOICE_ID=optional_voice_id
 MULTI_VOICE=true
-COHOST_VOICE_ID=optional_cohost_voice_id
+GOOGLE_APPLICATION_CREDENTIALS=path_to_service_account.json
+GOOGLE_CLOUD_PROJECT=your_project_id
+GOOGLE_CLOUD_STORAGE_BUCKET=your_bucket_name
 ```
 
 2. Install dependencies:
@@ -50,7 +52,8 @@ pip install -r requirements.txt
 2. Run the pipeline:
 
 ```bash
-python main.py
+python main.py google    # Use Google Cloud Text-to-Speech
+python main.py elevenlabs # Use ElevenLabs TTS
 ```
 
 - Extracted text will be processed by Gemini into a podcast-ready script.

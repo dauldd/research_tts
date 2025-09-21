@@ -19,14 +19,14 @@ def prepare_podcast_text_gemini(text, api_key, multi_voice=False):
     
     if multi_voice:
         prompt = f"""
-        You are the narrator of a technical research podcast in Finnish. The podcast features two speakers:
+        You are the narrator of a technical research podcast in English. The podcast features two speakers:
 
         - Narrator: presents the research confidently and authoritatively, diving into technical details.
         - Co-host: asks clarifying questions and summarizes key points interactively.
 
         Instructions:
         - Format every line starting with "Narrator:" or "Co-host:".
-        - Generate a podcast-style in Finnish script that dives directly into the content without preamble.
+        - Generate a podcast-style in English script that dives directly into the content without preamble.
         - Maintain a confident, authoritative tone while weaving in precise technical terminology. 
         - Summarize the research in an engaging flow, highlighting methodology, data-driven insights, 
         experimental design, and theoretical implications. Avoid oversimplifying; assume the audience 
@@ -50,10 +50,10 @@ def prepare_podcast_text_gemini(text, api_key, multi_voice=False):
         """
     else:
         prompt = f"""
-        You are the narrator of a technical research podcast in Finnish. Generate a comprehensive podcast script that presents the research in an engaging, informative manner.
+        You are the narrator of a technical research podcast in English. Generate a comprehensive podcast script that presents the research in an engaging, informative manner.
 
         Instructions:
-        - Generate a podcast-style in Finnish script that dives directly into the content without preamble.
+        - Generate a podcast-style in English script that dives directly into the content without preamble.
         - Maintain a confident, authoritative tone while weaving in precise technical terminology. 
         - Summarize the research in an engaging flow, highlighting methodology, data-driven insights, 
         experimental design, and theoretical implications. Avoid oversimplifying; assume the audience 
