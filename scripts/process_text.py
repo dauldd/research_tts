@@ -1,6 +1,7 @@
 import io
 import PyPDF2
 import requests
+import re
 
 def extract_text(pdf_content):
     try:
@@ -38,6 +39,9 @@ def prepare_podcast_text_gemini(text, api_key, multi_voice=False):
         IMPORTANT:
         - Do NOT include stage directions, music cues, or comments about audio.
         - Only produce spoken narrative, fully in the voice of the narrator.
+        - Do NOT use backticks, code blocks, or programming syntax in your response.
+        - When mentioning programming languages, spell them out naturally (e.g., "C sharp" not "C#", "C plus plus" not "C++").
+        - Avoid technical formatting that would sound unnatural when spoken aloud.
 
         Additionally:
         - Your final script should be long enough to produce around 20 MINUTES of spoken audio at a natural pace.
@@ -66,6 +70,9 @@ def prepare_podcast_text_gemini(text, api_key, multi_voice=False):
         - Do NOT include stage directions, music cues, or comments about audio.
         - Do NOT include speaker prefixes like "Narrator:" or "Co-host:" - this is a single-voice podcast.
         - Only produce spoken narrative content.
+        - Do NOT use backticks, code blocks, or programming syntax in your response.
+        - When mentioning programming languages, spell them out naturally (e.g., "C sharp" not "C#", "C plus plus" not "C++").
+        - Avoid technical formatting that would sound unnatural when spoken aloud.
 
         Additionally:
         - Your final script should be long enough to produce around 20 MINUTES of spoken audio at a natural pace.
